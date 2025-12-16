@@ -29,3 +29,12 @@ node_modules/
 # Build output (if needed later)
 dist/
 build/
+TEST_REPORT.md
+TEST_SUMMARY.txt
+comprehensive_test.js
+find_404.js
+package-lock.json
+package.json
+test-screenshots/
+test_script.js
+node_modules/
