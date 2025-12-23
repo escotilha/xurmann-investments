@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <defs>
+    <!-- Light gradient for dark backgrounds -->
+    <linearGradient id="xGradientLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#cbd5e0"/>
+    </linearGradient>
+    <!-- Gold accent gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d69e2e"/>
+      <stop offset="100%" stop-color="#ecc94b"/>
+    </linearGradient>
+  </defs>
+  
+  <g id="logo">
+    <!-- The X Mark -->
+    <g id="x-mark" transform="translate(20, 15)">
+      <path d="M0 0 L8 0 L45 42 L45 50 L37 50 L0 8 Z" fill="url(#xGradientLight)"/>
+      <path d="M45 0 L45 8 L8 50 L0 50 L0 42 L37 0 Z" fill="url(#xGradientLight)"/>
+      <rect x="18" y="52" width="9" height="3" rx="1" fill="url(#accentGradient)"/>
+    </g>
+    
+    <!-- Wordmark -->
+    <g id="wordmark" transform="translate(85, 22)">
+      <text 
+        font-family="'Optima', 'Palatino Linotype', 'Book Antiqua', Georgia, serif" 
+        font-size="42" 
+        font-weight="400" 
+        letter-spacing="8" 
+        fill="#f7fafc"
+      >XURMANN</text>
+    </g>
+    
+    <!-- Tagline -->
+    <g id="tagline" transform="translate(85, 80)">
+      <text 
+        font-family="'Optima', 'Palatino Linotype', 'Book Antiqua', Georgia, serif" 
+        font-size="11" 
+        font-weight="400" 
+        letter-spacing="4" 
+        fill="#a0aec0"
+      >INVESTMENTS</text>
+    </g>
+    
+    <!-- Accent line -->
+    <line x1="85" y1="68" x2="200" y2="68" stroke="url(#accentGradient)" stroke-width="1" opacity="0.7"/>
+  </g>
+</svg>

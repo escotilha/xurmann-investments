@@ -71,21 +71,11 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
         }
 
-        .logo svg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .logo-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-primary);
+        .logo img {
+            height: 40px;
+            width: auto;
         }
 
         .nav-links {
@@ -397,23 +387,95 @@
             margin: 0 auto 3rem;
         }
 
-        .contact-email {
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            color: var(--text-primary);
+            font-family: 'Sora', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
             display: inline-block;
             font-family: 'Sora', sans-serif;
             font-size: 0.85rem;
             font-weight: 400;
             color: var(--accent);
-            text-decoration: none;
+            background: transparent;
             padding: 1rem 2.5rem;
             border: 1px solid var(--accent);
+            cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 0.15em;
             text-transform: uppercase;
+            width: 100%;
         }
 
-        .contact-email:hover {
+        .submit-btn:hover {
             background: var(--accent);
             color: var(--bg-primary);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .form-status.error {
+            display: block;
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.2);
         }
 
         /* Footer */
@@ -425,25 +487,10 @@
             align-items: center;
         }
 
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-logo svg {
-            width: 20px;
-            height: 20px;
-            opacity: 0.6;
-        }
-
-        .footer-logo-text {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-muted);
+        .footer-logo img {
+            height: 30px;
+            width: auto;
+            opacity: 0.7;
         }
 
         .footer-info {
@@ -529,13 +576,7 @@
 </head>
 <body>
     <nav>
-        <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 100 100">
-                <rect x="10" y="45" width="80" height="10" fill="#d4d4d4" transform="rotate(45 50 50)"/>
-                <rect x="10" y="45" width="80" height="10" fill="#d4d4d4" transform="rotate(-45 50 50)"/>
-            </svg>
-            <span class="logo-text">Xurmann</span>
-        </div>
+        <div class="logo"><img src="xurmann-logo.svg" alt="Xurmann Investments"></div>
         <div class="nav-links">
             <a href="#philosophy">Philosophy</a>
             <a href="#focus">Focus</a>
@@ -633,17 +674,26 @@
     <section class="contact" id="contact">
         <h2>Let's Talk</h2>
         <p class="contact-subtitle">For investment inquiries, partnership opportunities, or general correspondence.</p>
-        <a href="mailto:pierre@xurmann.com" class="contact-email">pierre@xurmann.com</a>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+            <div class="form-status" id="formStatus"></div>
+        </form>
     </section>
 
     <footer>
-        <div class="footer-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 100 100">
-                <rect x="10" y="45" width="80" height="10" fill="#d4d4d4" transform="rotate(45 50 50)"/>
-                <rect x="10" y="45" width="80" height="10" fill="#d4d4d4" transform="rotate(-45 50 50)"/>
-            </svg>
-            <span class="footer-logo-text">Xurmann Investments</span>
-        </div>
+        <div class="footer-logo"><img src="xurmann-logo.svg" alt="Xurmann Investments"></div>
         <div class="footer-info">© 2024 Xurmann Investments. All rights reserved.</div>
     </footer>
 
@@ -679,6 +729,45 @@
             } else {
                 nav.style.background = 'linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%)';
                 nav.style.backdropFilter = 'none';
+            }
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        const formStatus = document.getElementById('formStatus');
+        const submitBtn = contactForm.querySelector('.submit-btn');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Reset status
+            formStatus.className = 'form-status';
+            formStatus.textContent = '';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Message sent successfully. We\'ll be in touch.';
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+            } catch (error) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = error.message || 'An error occurred. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
             }
         });
     </script>
