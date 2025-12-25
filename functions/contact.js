@@ -39,7 +39,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Xurmann Investments <onboarding@resend.dev>',
+        from: 'Xurmann Investments <contact@xurman.com>',
         to: [env.CONTACT_EMAIL],
         reply_to: email,
         subject: `Contact Form: ${name}`,
