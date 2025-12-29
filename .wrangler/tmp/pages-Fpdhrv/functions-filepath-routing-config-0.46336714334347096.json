@@ -1,0 +1,21 @@
+{
+  "routes": [
+    {
+      "routePath": "/contact",
+      "mountPath": "/",
+      "method": "OPTIONS",
+      "module": [
+        "contact.js:onRequestOptions"
+      ]
+    },
+    {
+      "routePath": "/contact",
+      "mountPath": "/",
+      "method": "POST",
+      "module": [
+        "contact.js:onRequestPost"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
