@@ -1,784 +1,848 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Xurmann Investments</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --bg-primary: #05472a;
-            --bg-secondary: #111111;
-            --bg-tertiary: #1a1a1a;
-            --text-primary: #f5f5f0;
-            --text-secondary: #a8a8a0;
-            --text-muted: #6b6b65;
-            --accent: #c9a962;
-            --accent-dim: rgba(201, 169, 98, 0.15);
-            --border: rgba(255, 255, 255, 0.06);
-            --border-light: rgba(255, 255, 255, 0.1);
-        }
+      :root {
+        --bg-primary: #05472a;
+        --bg-secondary: #111111;
+        --bg-tertiary: #1a1a1a;
+        --text-primary: #f5f5f0;
+        --text-secondary: #a8a8a0;
+        --text-muted: #6b6b65;
+        --accent: #c9a962;
+        --accent-dim: rgba(201, 169, 98, 0.15);
+        --border: rgba(255, 255, 255, 0.06);
+        --border-light: rgba(255, 255, 255, 0.1);
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        html {
-            scroll-behavior: smooth;
-        }
+      html {
+        scroll-behavior: smooth;
+      }
 
-        body {
-            font-family: 'Sora', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.7;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
+      body {
+        font-family: "Sora", sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.7;
+        font-weight: 300;
+        overflow-x: hidden;
+      }
 
-        /* Subtle grain texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 1000;
-        }
+      /* Subtle grain texture overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 1000;
+      }
 
-        /* Navigation */
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem 4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        background: linear-gradient(
+          to bottom,
+          var(--bg-primary) 0%,
+          transparent 100%
+        );
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 3rem;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 4rem;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          var(--accent-dim) 0%,
+          transparent 70%
+        );
+        opacity: 0.4;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 0.2s forwards;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.2rem, 6vw, 4.5rem);
+        font-weight: 300;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 0.4s forwards;
+      }
+
+      .hero-tagline {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        font-weight: 300;
+        opacity: 0;
+        animation: fadeUp 1s ease 0.6s forwards;
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 1s forwards;
+      }
+
+      .scroll-indicator span {
+        font-size: 0.65rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, var(--accent), transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
+
+      /* Sections */
+      section {
+        padding: 8rem 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: baseline;
+        gap: 2rem;
+        margin-bottom: 4rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 2rem;
+      }
+
+      .section-number {
+        font-size: 0.7rem;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+      }
+
+      .section-title {
+        font-size: 0.85rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* Philosophy Section */
+      .philosophy {
+        background: var(--bg-secondary);
+        padding: 10rem 4rem;
+        margin: 0;
+        max-width: none;
+      }
+
+      .philosophy-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .philosophy-content {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 6rem;
+        align-items: start;
+      }
+
+      .philosophy-statement {
+        font-size: 1.8rem;
+        font-weight: 200;
+        line-height: 1.6;
+        color: var(--text-primary);
+      }
+
+      .philosophy-details p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .philosophy-details p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Focus Areas */
+      .focus-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        background: var(--border);
+      }
+
+      .focus-item {
+        background: var(--bg-primary);
+        padding: 3rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .focus-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+      }
+
+      .focus-item:hover::before {
+        transform: scaleX(1);
+      }
+
+      .focus-item:hover {
+        background: var(--bg-secondary);
+      }
+
+      .focus-icon {
+        font-size: 0.7rem;
+        font-weight: 300;
+        letter-spacing: 0.2em;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+      }
+
+      .focus-item h3 {
+        font-size: 0.8rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .focus-item p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+
+      /* Principles Section */
+      .principles {
+        background: var(--bg-secondary);
+        padding: 10rem 4rem;
+        margin: 0;
+        max-width: none;
+      }
+
+      .principles-inner {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+      }
+
+      .principle {
+        padding: 2rem 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .principle-number {
+        font-size: 0.7rem;
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+      }
+
+      .principle h3 {
+        font-size: 0.85rem;
+        font-weight: 400;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      .principle p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+      }
+
+      /* Contact Section */
+      .contact {
+        text-align: center;
+        padding: 12rem 4rem;
+      }
+
+      .contact h2 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 300;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+      }
+
+      .contact-subtitle {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 500px;
+        margin: 0 auto 3rem;
+      }
+
+      .contact-form {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: left;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 0.5rem;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 1rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-light);
+        color: var(--text-primary);
+        font-family: "Sora", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        display: inline-block;
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--accent);
+        background: transparent;
+        padding: 1rem 2.5rem;
+        border: 1px solid var(--accent);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        width: 100%;
+      }
+
+      .submit-btn:hover {
+        background: var(--accent);
+        color: var(--bg-primary);
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .form-status {
+        margin-top: 1rem;
+        padding: 1rem;
+        text-align: center;
+        font-size: 0.85rem;
+        display: none;
+      }
+
+      .form-status.success {
+        display: block;
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.1);
+        border: 1px solid rgba(74, 222, 128, 0.2);
+      }
+
+      .form-status.error {
+        display: block;
+        color: #f87171;
+        background: rgba(248, 113, 113, 0.1);
+        border: 1px solid rgba(248, 113, 113, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        padding: 3rem 4rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-logo img {
+        height: 30px;
+        width: auto;
+        opacity: 0.7;
+      }
+
+      .footer-info {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        letter-spacing: 0.1em;
+      }
+
+      /* Animations */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
+          padding: 1.5rem 2rem;
         }
 
         .nav-links {
-            display: flex;
-            gap: 3rem;
+          gap: 2rem;
         }
 
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem;
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-eyebrow {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.2s forwards;
-        }
-
-        .hero h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: clamp(2.2rem, 6vw, 4.5rem);
-            font-weight: 300;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.4s forwards;
-        }
-
-        .hero-tagline {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            font-weight: 300;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.6s forwards;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 4rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 1s forwards;
-        }
-
-        .scroll-indicator span {
-            font-size: 0.65rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-
-        /* Sections */
         section {
-            padding: 8rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
+          padding: 6rem 2rem;
         }
 
-        .section-header {
-            display: flex;
-            align-items: baseline;
-            gap: 2rem;
-            margin-bottom: 4rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 2rem;
-        }
-
-        .section-number {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-        }
-
-        /* Philosophy Section */
-        .philosophy {
-            background: var(--bg-secondary);
-            padding: 10rem 4rem;
-            margin: 0;
-            max-width: none;
-        }
-
-        .philosophy-inner {
-            max-width: 1400px;
-            margin: 0 auto;
+        .philosophy,
+        .principles {
+          padding: 6rem 2rem;
         }
 
         .philosophy-content {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 6rem;
-            align-items: start;
+          grid-template-columns: 1fr;
+          gap: 3rem;
         }
 
-        .philosophy-statement {
-            font-family: 'Sora', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 200;
-            line-height: 1.6;
-            color: var(--text-primary);
-        }
-
-        .philosophy-details p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        .philosophy-details p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Focus Areas */
         .focus-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            background: var(--border);
-        }
-
-        .focus-item {
-            background: var(--bg-primary);
-            padding: 3rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .focus-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .focus-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .focus-item:hover {
-            background: var(--bg-secondary);
-        }
-
-        .focus-icon {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 300;
-            letter-spacing: 0.2em;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-        }
-
-        .focus-item h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .focus-item p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Principles Section */
-        .principles {
-            background: var(--bg-secondary);
-            padding: 10rem 4rem;
-            margin: 0;
-            max-width: none;
-        }
-
-        .principles-inner {
-            max-width: 1400px;
-            margin: 0 auto;
+          grid-template-columns: 1fr;
         }
 
         .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
         }
 
-        .principle {
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
+        .hero {
+          padding: 2rem;
         }
 
-        .principle-number {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
+        .philosophy-statement {
+          font-size: 1.6rem;
         }
 
-        .principle h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .principle p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Contact Section */
-        .contact {
-            text-align: center;
-            padding: 12rem 4rem;
-        }
-
-        .contact h2 {
-            font-family: 'Sora', sans-serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 300;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            color: var(--text-primary);
-        }
-
-        .contact-subtitle {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto 3rem;
-        }
-
-        .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-light);
-            color: var(--text-primary);
-            font-family: 'Sora', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 300;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            display: inline-block;
-            font-family: 'Sora', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--accent);
-            background: transparent;
-            padding: 1rem 2.5rem;
-            border: 1px solid var(--accent);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .form-status {
-            margin-top: 1rem;
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.85rem;
-            display: none;
-        }
-
-        .form-status.success {
-            display: block;
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid rgba(74, 222, 128, 0.2);
-        }
-
-        .form-status.error {
-            display: block;
-            color: #f87171;
-            background: rgba(248, 113, 113, 0.1);
-            border: 1px solid rgba(248, 113, 113, 0.2);
-        }
-
-        /* Footer */
         footer {
-            padding: 3rem 4rem;
-            border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
         }
-
-        .footer-logo img {
-            height: 30px;
-            width: auto;
-            opacity: 0.7;
-        }
-
-        .footer-info {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            letter-spacing: 0.1em;
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.3;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            nav {
-                padding: 1.5rem 2rem;
-            }
-
-            .nav-links {
-                gap: 2rem;
-            }
-
-            section {
-                padding: 6rem 2rem;
-            }
-
-            .philosophy, .principles {
-                padding: 6rem 2rem;
-            }
-
-            .philosophy-content {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .focus-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .principles-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 2rem;
-            }
-
-            .philosophy-statement {
-                font-size: 1.6rem;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <div class="logo"><img src="xurmann-logo.svg" alt="Xurmann Investments"></div>
-        <div class="nav-links">
-            <a href="#philosophy">Philosophy</a>
-            <a href="#focus">Focus</a>
-            <a href="#principles">Principles</a>
-            <a href="#contact">Contact</a>
-        </div>
+      <div class="logo">
+        <img src="xurmann-logo.svg" alt="Xurmann Investments" />
+      </div>
+      <div class="nav-links">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#focus">Focus</a>
+        <a href="#principles">Principles</a>
+        <a href="#contact">Contact</a>
+      </div>
     </nav>
 
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-eyebrow">Private Investment Office</div>
-            <h1>Xurmann Investments</h1>
-            <p class="hero-tagline">Long-term capital allocation across technology, software, and emerging markets</p>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <div class="scroll-line"></div>
-        </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Private Investment Office</div>
+        <h1>Xurmann Investments</h1>
+        <p class="hero-tagline">
+          Long-term capital allocation across technology, software, and emerging
+          markets
+        </p>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
     </section>
 
     <section class="philosophy" id="philosophy">
-        <div class="philosophy-inner">
-            <div class="section-header">
-                <span class="section-number">01</span>
-                <span class="section-title">Philosophy</span>
-            </div>
-            <div class="philosophy-content">
-                <div class="philosophy-statement">
-                    "We believe in patient capital deployed behind exceptional operators building enduring businesses in underserved markets."
-                </div>
-                <div class="philosophy-details">
-                    <p>Xurmann Investments serves as a private holding company focused on long-term value creation through strategic investments in technology-enabled businesses, with particular emphasis on Latin American markets where structural inefficiencies create compelling opportunities.</p>
-                    <p>Our approach combines rigorous financial analysis with deep operational understanding, allowing us to identify and support businesses positioned for sustainable growth. We favor companies with strong unit economics, defensible market positions, and management teams aligned for the long term.</p>
-                    <p>Rather than seeking quick exits, we build lasting partnerships with founders and operators who share our commitment to disciplined growth and value creation.</p>
-                </div>
-            </div>
+      <div class="philosophy-inner">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <span class="section-title">Philosophy</span>
         </div>
+        <div class="philosophy-content">
+          <div class="philosophy-statement">
+            "We believe in patient capital deployed behind exceptional operators
+            building enduring businesses in underserved markets."
+          </div>
+          <div class="philosophy-details">
+            <p>
+              Xurmann Investments serves as a private holding company focused on
+              long-term value creation through strategic investments in
+              technology-enabled businesses, with particular emphasis on Latin
+              American markets where structural inefficiencies create compelling
+              opportunities.
+            </p>
+            <p>
+              Our approach combines rigorous financial analysis with deep
+              operational understanding, allowing us to identify and support
+              businesses positioned for sustainable growth. We favor companies
+              with strong unit economics, defensible market positions, and
+              management teams aligned for the long term.
+            </p>
+            <p>
+              Rather than seeking quick exits, we build lasting partnerships
+              with founders and operators who share our commitment to
+              disciplined growth and value creation.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="focus">
-        <div class="section-header">
-            <span class="section-number">02</span>
-            <span class="section-title">Focus Areas</span>
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <span class="section-title">Focus Areas</span>
+      </div>
+      <div class="focus-grid">
+        <div class="focus-item">
+          <div class="focus-icon">01</div>
+          <h3>B2B Software</h3>
+          <p>
+            Enterprise and SMB software businesses with recurring revenue
+            models, strong retention metrics, and clear paths to profitability.
+            Particular interest in vertical SaaS serving specialized industries.
+          </p>
         </div>
-        <div class="focus-grid">
-            <div class="focus-item">
-                <div class="focus-icon">01</div>
-                <h3>B2B Software</h3>
-                <p>Enterprise and SMB software businesses with recurring revenue models, strong retention metrics, and clear paths to profitability. Particular interest in vertical SaaS serving specialized industries.</p>
-            </div>
-            <div class="focus-item">
-                <div class="focus-icon">02</div>
-                <h3>Latin American Markets</h3>
-                <p>Technology and technology-enabled businesses serving Brazilian and broader Latin American markets, where growing digital adoption creates significant opportunities for well-positioned operators.</p>
-            </div>
-            <div class="focus-item">
-                <div class="focus-icon">03</div>
-                <h3>Strategic Acquisitions</h3>
-                <p>Platform and add-on acquisitions that create value through operational improvement, market consolidation, or strategic repositioning. Focus on businesses with strong fundamentals and clear value creation levers.</p>
-            </div>
+        <div class="focus-item">
+          <div class="focus-icon">02</div>
+          <h3>Latin American Markets</h3>
+          <p>
+            Technology and technology-enabled businesses serving Brazilian and
+            broader Latin American markets, where growing digital adoption
+            creates significant opportunities for well-positioned operators.
+          </p>
         </div>
+        <div class="focus-item">
+          <div class="focus-icon">03</div>
+          <h3>Strategic Acquisitions</h3>
+          <p>
+            Platform and add-on acquisitions that create value through
+            operational improvement, market consolidation, or strategic
+            repositioning. Focus on businesses with strong fundamentals and
+            clear value creation levers.
+          </p>
+        </div>
+      </div>
     </section>
 
     <section class="principles" id="principles">
-        <div class="principles-inner">
-            <div class="section-header">
-                <span class="section-number">03</span>
-                <span class="section-title">Investment Principles</span>
-            </div>
-            <div class="principles-grid">
-                <div class="principle">
-                    <div class="principle-number">01</div>
-                    <h3>Permanence Over Exit</h3>
-                    <p>We invest with the intention to hold indefinitely. Our holding period is "forever" unless fundamentals deteriorate or significantly better capital allocation opportunities emerge.</p>
-                </div>
-                <div class="principle">
-                    <div class="principle-number">02</div>
-                    <h3>Alignment of Interests</h3>
-                    <p>We partner with management teams who have meaningful ownership stakes and whose incentives are aligned with long-term value creation rather than short-term metrics.</p>
-                </div>
-                <div class="principle">
-                    <div class="principle-number">03</div>
-                    <h3>Margin of Safety</h3>
-                    <p>Disciplined capital deployment requires acquiring assets at valuations that provide adequate downside protection while maintaining exposure to upside potential.</p>
-                </div>
-                <div class="principle">
-                    <div class="principle-number">04</div>
-                    <h3>Operational Excellence</h3>
-                    <p>Beyond capital, we contribute strategic guidance and operational expertise to help portfolio companies accelerate growth and improve execution.</p>
-                </div>
-            </div>
+      <div class="principles-inner">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <span class="section-title">Investment Principles</span>
         </div>
+        <div class="principles-grid">
+          <div class="principle">
+            <div class="principle-number">01</div>
+            <h3>Permanence Over Exit</h3>
+            <p>
+              We invest with the intention to hold indefinitely. Our holding
+              period is "forever" unless fundamentals deteriorate or
+              significantly better capital allocation opportunities emerge.
+            </p>
+          </div>
+          <div class="principle">
+            <div class="principle-number">02</div>
+            <h3>Alignment of Interests</h3>
+            <p>
+              We partner with management teams who have meaningful ownership
+              stakes and whose incentives are aligned with long-term value
+              creation rather than short-term metrics.
+            </p>
+          </div>
+          <div class="principle">
+            <div class="principle-number">03</div>
+            <h3>Margin of Safety</h3>
+            <p>
+              Disciplined capital deployment requires acquiring assets at
+              valuations that provide adequate downside protection while
+              maintaining exposure to upside potential.
+            </p>
+          </div>
+          <div class="principle">
+            <div class="principle-number">04</div>
+            <h3>Operational Excellence</h3>
+            <p>
+              Beyond capital, we contribute strategic guidance and operational
+              expertise to help portfolio companies accelerate growth and
+              improve execution.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2>Let's Talk</h2>
-        <p class="contact-subtitle">For investment inquiries, partnership opportunities, or general correspondence.</p>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-            <div class="form-status" id="formStatus"></div>
-        </form>
+      <h2>Let's Talk</h2>
+      <p class="contact-subtitle">
+        For investment inquiries, partnership opportunities, or general
+        correspondence.
+      </p>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+        <div class="form-status" id="formStatus"></div>
+      </form>
     </section>
 
     <footer>
-        <div class="footer-logo"><img src="xurmann-logo.svg" alt="Xurmann Investments"></div>
-        <div class="footer-info">© 2024 Xurmann Investments. All rights reserved.</div>
+      <div class="footer-logo">
+        <img src="xurmann-logo.svg" alt="Xurmann Investments" />
+      </div>
+      <div class="footer-info">
+        © 2025 Xurmann Investments. All rights reserved.
+      </div>
     </footer>
 
     <script>
-        // Smooth reveal on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      // Smooth reveal on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.focus-item, .principle').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
         });
+      }, observerOptions);
 
-        // Navbar background on scroll
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(10, 10, 10, 0.95)';
-                nav.style.backdropFilter = 'blur(10px)';
-            } else {
-                nav.style.background = 'linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%)';
-                nav.style.backdropFilter = 'none';
-            }
-        });
+      document.querySelectorAll(".focus-item, .principle").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(el);
+      });
 
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        const formStatus = document.getElementById('formStatus');
-        const submitBtn = contactForm.querySelector('.submit-btn');
+      // Navbar background on scroll
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(10, 10, 10, 0.95)";
+          nav.style.backdropFilter = "blur(10px)";
+        } else {
+          nav.style.background =
+            "linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%)";
+          nav.style.backdropFilter = "none";
+        }
+      });
 
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+      // Contact form submission
+      const contactForm = document.getElementById("contactForm");
+      const formStatus = document.getElementById("formStatus");
+      const submitBtn = contactForm.querySelector(".submit-btn");
 
-            // Reset status
-            formStatus.className = 'form-status';
-            formStatus.textContent = '';
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-            try {
-                const formData = new FormData(contactForm);
-                const data = {
-                    name: formData.get('name'),
-                    email: formData.get('email'),
-                    message: formData.get('message')
-                };
+        // Reset status
+        formStatus.className = "form-status";
+        formStatus.textContent = "";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
 
-                const response = await fetch('/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+        try {
+          const formData = new FormData(contactForm);
+          const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            message: formData.get("message"),
+          };
 
-                const result = await response.json();
+          const response = await fetch("/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
 
-                if (result.success) {
-                    formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Message sent successfully. We\'ll be in touch.';
-                    contactForm.reset();
-                } else {
-                    throw new Error(result.error || 'Failed to send message');
-                }
-            } catch (error) {
-                formStatus.className = 'form-status error';
-                formStatus.textContent = error.message || 'An error occurred. Please try again.';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Send Message';
-            }
-        });
+          const result = await response.json();
+
+          if (result.success) {
+            formStatus.className = "form-status success";
+            formStatus.textContent =
+              "Message sent successfully. We'll be in touch.";
+            contactForm.reset();
+          } else {
+            throw new Error(result.error || "Failed to send message");
+          }
+        } catch (error) {
+          formStatus.className = "form-status error";
+          formStatus.textContent =
+            error.message || "An error occurred. Please try again.";
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send Message";
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
